@@ -7,10 +7,14 @@ class BinarySearchTest {
     void findElement_found_in_array_thenPass() {
         BinarySearch bis = new BinarySearch();
         int []input = new int[]{1,2,3,4,5};
+        bis.getInstrumentation().reset("findElementRecursive");
         int pos = bis.findElementRecursive(input,0,4, 4);
         assert pos==3;
+        assert Math.round(Math.log(5)) == bis.getInstrumentation().getIterationCount();
+        bis.getInstrumentation().reset("findElementNonRecursive");
         pos = bis.findElementNonRecursive(input,4);
         assert pos==3;
+        assert Math.round(Math.log(5)) == bis.getInstrumentation().getIterationCount();
         input = new int[]{1,2,3,4,5,6};
         pos = bis.findElementRecursive(input,0,5, 4);
         assert pos==3;
@@ -22,8 +26,10 @@ class BinarySearchTest {
     void findElement_not_found_in_array_thenPass() {
         BinarySearch bis = new BinarySearch();
         int []input = new int[]{1,2,3,4,5};
+        bis.getInstrumentation().reset("findElementRecursive");
         int pos = bis.findElementRecursive(input,0,4, 6);
         assert pos==-1;
+        assert Math.log(5)==bis.getInstrumentation().getIterationCount();
         pos = bis.findElementNonRecursive(input,6);
         assert pos==-1;
         input = new int[]{1,2,3,4,5,6};

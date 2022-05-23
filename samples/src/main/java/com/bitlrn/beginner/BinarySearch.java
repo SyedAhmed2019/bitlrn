@@ -1,12 +1,26 @@
 package com.bitlrn.beginner;
 
+import com.bitlrn.util.Instrumentation;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Given a sorted array try to find out the position of
+ * a given element within the array.
+ * Return -1 if the element is not found
+ * Shows both iterative and recursive approach
+ *
+ */
 public class BinarySearch {
+    private Instrumentation instrumentation;
+    public BinarySearch(){
+        instrumentation = new Instrumentation();
+    }
     public int findElementNonRecursive(int[] input,int element){
         int low = 0;
         int high = input.length-1;
+        instrumentation.increment();
         while ( low < high){
             if (element == input[low]){
                 return low;
@@ -16,16 +30,20 @@ public class BinarySearch {
             }
             int mid = (low+high)/2;
             if ( element > input[mid]){
+                instrumentation.increment();
                 low = mid+1;
             }else if ( element == input[mid]){
+                instrumentation.increment();
                 return mid;
             }else{
+                instrumentation.increment();
                 high = mid;
             }
         }
         return -1;
     }
     public int findElementRecursive(int[] input, int min, int max, int elem){
+        instrumentation.increment();
         if (min >= max){
             return -1;
         }
@@ -44,6 +62,10 @@ public class BinarySearch {
             // is it in min to middle
             return findElementRecursive(input, min, (min+max)/2,elem);
         }
+    }
+
+    public Instrumentation getInstrumentation(){
+        return instrumentation;
     }
 
     public static void main(String[] args){
