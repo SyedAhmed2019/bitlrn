@@ -64,4 +64,10 @@ class BinarySearchTest {
         pos = bis.findElementNonRecursive(input,4);
         assert pos==-1;
     }
+
+    @Test
+    void findElement_non_existent_using_Iterative(){
+        BinarySearch bis = new BinarySearch();
+        bis.findElementIterative(new int[]{-1,0,3,5,9,12},2);
+    }
 }

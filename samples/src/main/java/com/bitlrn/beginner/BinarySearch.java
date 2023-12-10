@@ -64,13 +64,30 @@ public class BinarySearch {
         }
     }
 
+    public int findElementIterative(int[] nums,int target){
+        int low = 0;
+        int high = nums.length-1;
+        int mid = -1;
+        while (low <= high){
+            mid = low + (high-low)/2;
+            if (target < nums[mid]){
+                high = mid-1;
+            }else if (target > nums[mid]){
+                low = mid +1;
+            }else{
+                return mid;
+            }
+        }
+        return -1;
+    }
+
     public Instrumentation getInstrumentation(){
         return instrumentation;
     }
 
     public static void main(String[] args){
         nonUserInput();
-        userInput();
+        //userInput();
     }
 
     private static void userInput() {
@@ -103,13 +120,14 @@ public class BinarySearch {
 
     private static void nonUserInput() {
         BinarySearch bis = new BinarySearch();
-        int[][] inputLists = {{}, {0, 1}, {1, 2, 3}, {-2, 0, 3, 5, 8, 15}, {-19, 0, 3, 5, 9, 15}};
-        int[] lookupList = {12, 1, 3, 8, 2};
+        int[][] inputLists = {{}, {0, 1}, {1, 2, 3}, {-2, 0, 3, 5, 8, 15}, {-19, 0, 3, 5, 9, 15},{-1,0,3,5,9,12}};
+        int[] lookupList = {12, 1, 3, 8, 2,2};
         for (int i=0; i <inputLists.length;++i){
             System.out.println("input list :"+ Arrays.toString(inputLists[i]));
             System.out.println("find element :"+lookupList[i]);
             System.out.println("result non-recursive:"+bis.findElementNonRecursive(inputLists[i],lookupList[i]));
             System.out.println("result recursive:"+ bis.findElementRecursive(inputLists[i],0,inputLists[i].length-1,lookupList[i]));
+            System.out.println("result iterative-efficient:"+ bis.findElementIterative(inputLists[i],lookupList[i] ));
         }
     }
 }
