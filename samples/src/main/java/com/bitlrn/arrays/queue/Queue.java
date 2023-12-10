@@ -16,11 +16,11 @@ public class Queue<T> {
         head = 0;
     }
 
-    public void enqueue(T item){
+    public void enqueue(T item) {
         items.add(item);
     }
 
-    public T dequeue(){
+    public T dequeue() {
         return items.remove(head++);
     }
 }

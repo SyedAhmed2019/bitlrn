@@ -1,5 +1,7 @@
 package com.bitlrn.hacker;
+
 import java.util.Scanner;
+
 class UsernameValidatorHelper {
     /*
      * Write regular expression here.
@@ -29,9 +31,9 @@ public class UserNameValidator {
     }
 
     // for testing purpose only
-    public static void checkManyUserNames(String [] names){
-        for (int i = 0; i < names.length;++i){
-            System.out.println("Checking "+ names[i]);
+    public static void checkManyUserNames(String[] names) {
+        for (int i = 0; i < names.length; ++i) {
+            System.out.println("Checking " + names[i]);
             checkUserName(names[i]);
         }
     }

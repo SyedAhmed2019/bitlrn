@@ -12,15 +12,15 @@ public class NotInListNumber {
         // sort the input list
         Collections.sort(input);
         boolean found = false;
-        for(int current: input){
-            int firstNumberNotInList = current+1;
-            if(current >0 && !input.contains(firstNumberNotInList)){
+        for (int current : input) {
+            int firstNumberNotInList = current + 1;
+            if (current > 0 && !input.contains(firstNumberNotInList)) {
                 found = true;
                 System.out.println(firstNumberNotInList);
                 break;
             }
         }
-        if(!found) {
+        if (!found) {
             System.out.println(input.get(input.size() - 1) + 1);
         }
     }

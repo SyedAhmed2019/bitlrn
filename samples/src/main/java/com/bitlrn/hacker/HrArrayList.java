@@ -1,6 +1,5 @@
 package com.bitlrn.hacker;
 
-import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -47,7 +46,7 @@ import java.util.Scanner;
  */
 
 public class HrArrayList {
-    public static void main2(String args[]) {
+    public static void main2(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int sizeOfLists = scanner.nextInt();
         List<List<Integer>> listOfLists = new ArrayList<>();

@@ -11,16 +11,16 @@ public class BinaryOnesCounter {
     // 0110
     // 0111
 
+    public static void main(String[] args) {
+        BinaryOnesCounter boc = new BinaryOnesCounter();
+        System.out.println(boc.countBits(5));
+    }
+
     public int[] countBits(int num) {
         int[] ans = new int[num + 1];
         for (int x = 1; x <= num; ++x) {
             ans[x] = ans[x & (x - 1)] + 1;
         }
         return ans;
-    }
-
-    public static void main(String[] args) {
-        BinaryOnesCounter boc = new BinaryOnesCounter();
-        System.out.println(boc.countBits(5));
     }
 }

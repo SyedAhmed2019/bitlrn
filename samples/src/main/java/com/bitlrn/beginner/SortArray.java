@@ -7,7 +7,8 @@ import com.bitlrn.util.Instrumentation;
  */
 public class SortArray {
     private final Instrumentation instrumentation;
-    public SortArray (){
+
+    public SortArray() {
         instrumentation = new Instrumentation();
     }
 
@@ -17,13 +18,11 @@ public class SortArray {
      * 1 compares with 3
      * 2 compares with 2
      * 3 compares with 1
-     *
-     *
      */
-    public void bruteForce(int []input){
-        for (int i =0; i < input.length;++i){
-            for (int j=i+1; j <input.length; ++j){
-                if (input[i] > input[j]){
+    public void bruteForce(int[] input) {
+        for (int i = 0; i < input.length; ++i) {
+            for (int j = i + 1; j < input.length; ++j) {
+                if (input[i] > input[j]) {
                     int temp = input[i];
                     input[i] = input[j];
                     input[j] = temp;
@@ -33,7 +32,7 @@ public class SortArray {
         }
     }
 
-    public Instrumentation getInstrumentation(){
+    public Instrumentation getInstrumentation() {
         return instrumentation;
     }
 }

@@ -8,20 +8,20 @@ public class BitPlusPlus {
         BitPlusPlus bpp = new BitPlusPlus();
         Scanner scanner = new Scanner(System.in);
         int count = scanner.nextInt();
-        Integer result= new Integer(0);
-        for(int i = 0; i < count; ++i){
+        Integer result = 0;
+        for (int i = 0; i < count; ++i) {
             result += bpp.execute(scanner.next(), 0);
         }
         System.out.println(result);
 
     }
 
-    private Integer  execute(String next, Integer sum) {
-       if( next.contains("+")){
-           sum +=1;
-       }else if (next.contains("-")){
-           sum -=1;
-       }
-       return sum;
+    private Integer execute(String next, Integer sum) {
+        if (next.contains("+")) {
+            sum += 1;
+        } else if (next.contains("-")) {
+            sum -= 1;
+        }
+        return sum;
     }
 }

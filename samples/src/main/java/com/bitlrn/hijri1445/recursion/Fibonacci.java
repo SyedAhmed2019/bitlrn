@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Fibonacci {
 
-    private static Scanner scanner = new Scanner(System.in);
-    Map<Long,Long> history = new HashMap<>();
+    private static final Scanner scanner = new Scanner(System.in);
+    Map<Long, Long> history = new HashMap<>();
 
     public static void main(String[] args) {
         Fibonacci fib = new Fibonacci();
@@ -45,49 +45,49 @@ public class Fibonacci {
     // 0 - 1
     // 0 1  - 2
 
-    private void generateUsingRecursion( int input) {
+    private void generateUsingRecursion(int input) {
         // let us initially print the the two numbers
-        history.put(0L,0L);
-        history.put(1L,1L);
+        history.put(0L, 0L);
+        history.put(1L, 1L);
 
-        for(long i = 0; i < input; ++i) {
+        for (long i = 0; i < input; ++i) {
             long millis = System.currentTimeMillis();
             long value = recurseEff(i);
-            System.out.println("fibonacci at "+i + " is " + value);
+            System.out.println("fibonacci at " + i + " is " + value);
             //history.put(i,value);
-            System.out.println("Time taken:"+ (System.currentTimeMillis()-millis));
+            System.out.println("Time taken:" + (System.currentTimeMillis() - millis));
         }
 
     }
 
 
     private long recurse(long input) {
-        if(input <= 1){
+        if (input <= 1) {
             return input;
         }
-        return recurse(input-1)+recurse(input-2);
+        return recurse(input - 1) + recurse(input - 2);
     }
 
 
     private long recurseEff(long input) {
-        if(input <= 1){
+        if (input <= 1) {
             return input;
         }
-        long leftSum,rightSum;
-        if(!history.containsKey(input-1)) {
+        long leftSum, rightSum;
+        if (!history.containsKey(input - 1)) {
             leftSum = recurse(input - 1);
-            history.put(input-1,leftSum);
-        }else {
-            leftSum = history.get(input-1);
+            history.put(input - 1, leftSum);
+        } else {
+            leftSum = history.get(input - 1);
         }
 
-        if(!history.containsKey(input-2)) {
+        if (!history.containsKey(input - 2)) {
             rightSum = recurse(input - 2);
-            history.put(input-2,rightSum);
-        }else {
-            rightSum = history.get(input-2);
+            history.put(input - 2, rightSum);
+        } else {
+            rightSum = history.get(input - 2);
         }
-        history.put(input, leftSum+rightSum);
-        return leftSum+rightSum;
+        history.put(input, leftSum + rightSum);
+        return leftSum + rightSum;
     }
 }

@@ -3,14 +3,11 @@ package com.bitlrn.beginner;
 import com.bitlrn.hacker.UserNameValidator;
 import org.junit.jupiter.api.Test;
 
-import java.io.PrintWriter;
-import java.util.Scanner;
-
 public class UserNameValidatorTest {
     @Test
     public void testLargeInputUsername() throws InterruptedException {
 
-        String input[] = {"jp83+ZVX_oYE_T$mlH-QqYIvYhKD#",
+        String[] input = {"jp83+ZVX_oYE_T$mlH-QqYIvYhKD#",
                 "pNP5riufbZGd@zyl$aBAc@sl_z5a4Kob7k#qSX@ydHA4B1a7X6D",
                 "TIrjdU2fYSNCWLJSU3F6gsXJIcIINV0CuuH#awSOnqQ32Udt1HywVDn55CgiD_K#",
                 "H#Yyzgw=0TdEo31MW6174Xzu9QU", "nDeFGdtz1rOFdze8zBbf3nKoY3i7r5tV$",

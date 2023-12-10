@@ -3,9 +3,9 @@ package com.bitlrn.tree.crud;
 import java.util.*;
 
 public class Tree<T> {
+    private final int shortestPath = 0;
     Queue<Node> queue = new LinkedList<>();
     Set<Node> visitedNode = new HashSet<>();
-    private final int shortestPath = 0;
 
     static void decode(String s, Node root) {
         if (root == null || s.length() == 0) {
@@ -23,7 +23,7 @@ public class Tree<T> {
                 case '0':
                     if (currentNode.left != null) {
                         currentNode = currentNode.left;
-                    }else{
+                    } else {
                         System.out.println(currentNode.data);
                     }
 
@@ -31,7 +31,7 @@ public class Tree<T> {
                 case '1':
                     if (currentNode.right != null) {
                         currentNode = currentNode.right;
-                    }else{
+                    } else {
                         System.out.println(currentNode.data);
                     }
                     break;

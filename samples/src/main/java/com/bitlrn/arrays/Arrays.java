@@ -4,13 +4,31 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- *  Contains all arrays related algorithm questions.
+ * Contains all arrays related algorithm questions.
  */
 
 
 public class Arrays {
 
-   static class ArraySummer {
+    public static void main(String[] args) {
+
+        //1. Find max sum of K elements from front or back of array
+        int[] a = {-533, -666, -500, 169, 724, 478, 358, -38, -536, 705, -855, 281, -173, 961, -509, -5, 942, -173, 436, -609, -396, 902, -847, -708, -618, 421, -284, 718, 895, 447, 726, -229, 538, 869, 912, 667, -701, 35, 894, -297, 811, 322, -667, 673, -336, 141, 711, -747, -132, 547, 644, -338, -243, -963, -141, -277, 741, 529, -222, -684, 35};
+        System.out.println(ArraySummer.findMaxSumOfKElementsBruteForce(a, 48));
+        System.out.println(ArraySummer.findMaxSumOfKElementsEfficient(a, 48));
+
+        System.out.println("Finding common elements in an array");
+        List<Integer> result = ArrayFinder.findCommonElementsIn3SortedArrayBruteForce(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 6, 7, 0}, new int[]{4, 5, 6, 7, 9});
+        result.stream().forEach(System.out::println);
+        Set<Integer> resultSet = ArrayFinder.findCommonElementsIn3SortedArrayEfficient(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 6, 7, 0}, new int[]{4, 5, 6, 7, 9});
+        resultSet.stream().forEach(System.out::println);
+        ArrayFinder.findCommonElementsIn3SortedArrayEfficient2(new int[]{1, 2, 3, 4, 5}, new int[]{4, 5, 6, 7, 0}, new int[]{4, 5, 6, 7, 9});
+        System.out.println("Subarray sum is zero?");
+        System.out.print(ArrayFinder.IsSubArraySumIsZero(new int[]{1, 2, -5, 5, 3}));
+        System.out.println(ArrayFinder.IsSubArraySumIsZero2(new int[]{1, 2, -5, 5, 3}));
+    }
+
+    static class ArraySummer {
         /**
          * Brute force approach to find the maximum sum of K elements in
          * an array
@@ -20,7 +38,7 @@ public class Arrays {
          *          to get maximum sum
          * @return max sum of k elements in an array
          */
-        static int findMaxSumOfKElementsBruteForce(int A[], int k) {
+        static int findMaxSumOfKElementsBruteForce(int[] A, int k) {
             // selection sort
             for (int i = 0; i < A.length; ++i) {
                 for (int j = i + 1; j < A.length; ++j) {
@@ -38,21 +56,21 @@ public class Arrays {
             return maxSum;
         }
 
-       /**
-        * <Note>
-        * Just tries to find form either front or back of the array
-        * not equal to the brute force that tries to find from entire array
-        * Sliding window.
-        * </Note>
-        */
+        /**
+         * <Note>
+         * Just tries to find form either front or back of the array
+         * not equal to the brute force that tries to find from entire array
+         * Sliding window.
+         * </Note>
+         */
 
         static int findMaxSumOfKElementsEfficient(int[] a, int k) {
             int sum = 0;
-            for( int i=0; i < k; ++i){
+            for (int i = 0; i < k; ++i) {
                 sum += a[i];
             }
             int currentMax = sum;
-            for(int i=k-1,j=a.length-1; i>=0 && j>=a.length-k;--i,j--){
+            for (int i = k - 1, j = a.length - 1; i >= 0 && j >= a.length - k; --i, j--) {
                 sum -= a[i];
                 sum += a[j];
                 currentMax = Math.max(currentMax, sum);
@@ -106,21 +124,21 @@ public class Arrays {
          */
         static Set<Integer> findCommonElementsIn3SortedArrayEfficient(int[] a, int[] b, int[] c) {
             // assumption all the 3 arrays are of equal length
-            Map<Integer,Integer> counterMap = new HashMap<>();
+            Map<Integer, Integer> counterMap = new HashMap<>();
             // O(N)
             for (int i = 0; i < a.length; i++) {
-                counterMap.putIfAbsent(a[i],1);
+                counterMap.putIfAbsent(a[i], 1);
             }
             //O(N)
-            for (int i=0; i < b.length;i++){
-                counterMap.computeIfPresent(b[i],(key,val)->++val);
+            for (int i = 0; i < b.length; i++) {
+                counterMap.computeIfPresent(b[i], (key, val) -> ++val);
             }
             // O(N)
-            for (int i=0; i < c.length;i++){
-                counterMap.computeIfPresent(c[i],(key,val)->++val);
+            for (int i = 0; i < c.length; i++) {
+                counterMap.computeIfPresent(c[i], (key, val) -> ++val);
             }
             // O(N)
-            return counterMap.entrySet().stream().filter(entry->entry.getValue()==3).collect(Collectors.toMap(entry->entry.getKey(),entry->entry.getValue())).keySet();
+            return counterMap.entrySet().stream().filter(entry -> entry.getValue() == 3).collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue())).keySet();
         }
 
 
@@ -128,8 +146,7 @@ public class Arrays {
          * Prints common elemnts between 3 sorted array
          * Most efficient have just O(N) and O(1) space complexity
          */
-        static void findCommonElementsIn3SortedArrayEfficient2(int ar1[], int ar2[], int ar3[])
-        {
+        static void findCommonElementsIn3SortedArrayEfficient2(int[] ar1, int[] ar2, int[] ar3) {
             // Initialize starting indexes for ar1[], ar2[] and
             // ar3[]
             int i = 0, j = 0, k = 0;
@@ -168,22 +185,22 @@ public class Arrays {
          * @param a - given array
          * @return true if any subarray with sum being 0
          */
-        static boolean IsSubArraySumIsZero(int a[]){
-            Map<Integer,Integer> countMapper = new HashMap<>();
+        static boolean IsSubArraySumIsZero(int[] a) {
+            Map<Integer, Integer> countMapper = new HashMap<>();
             int prefixSum = a[0];
-            countMapper.putIfAbsent(prefixSum,1);
-            for(int i=1; i < a.length; ++i){
+            countMapper.putIfAbsent(prefixSum, 1);
+            for (int i = 1; i < a.length; ++i) {
                 prefixSum += a[i];
-                if(countMapper.containsKey(prefixSum)){
+                if (countMapper.containsKey(prefixSum)) {
                     return true;
-                }else{
-                    countMapper.putIfAbsent(prefixSum,1);
+                } else {
+                    countMapper.putIfAbsent(prefixSum, 1);
                 }
             }
             return false;
         }
 
-        static boolean IsSubArraySumIsZero2(int a[]){
+        static boolean IsSubArraySumIsZero2(int[] a) {
             // Creates an empty hashset hs
             Set<Integer> hs = new HashSet<Integer>();
 
@@ -191,8 +208,7 @@ public class Arrays {
             int sum = 0;
 
             // Traverse through the given array
-            for (int i = 0; i < a.length; i++)
-            {
+            for (int i = 0; i < a.length; i++) {
                 // Add current element to sum
                 sum += a[i];
 
@@ -213,23 +229,5 @@ public class Arrays {
             // no subarray with 0 sum
             return false;
         }
-    }
-
-    public static void main(String[] args) {
-
-        //1. Find max sum of K elements from front or back of array
-        int a[] = {-533, -666, -500, 169, 724, 478, 358, -38, -536, 705, -855, 281, -173, 961, -509, -5, 942, -173, 436, -609, -396, 902, -847, -708, -618, 421, -284, 718, 895, 447, 726, -229, 538, 869, 912, 667, -701, 35, 894, -297, 811, 322, -667, 673, -336, 141, 711, -747, -132, 547, 644, -338, -243, -963, -141, -277, 741, 529, -222, -684, 35 };
-        System.out.println(ArraySummer.findMaxSumOfKElementsBruteForce(a,48));
-        System.out.println(ArraySummer.findMaxSumOfKElementsEfficient(a,48));
-
-        System.out.println("Finding common elements in an array");
-        List<Integer> result = ArrayFinder.findCommonElementsIn3SortedArrayBruteForce(new int[]{1,2,3,4,5},new int[]{4,5,6,7,0},new int[]{4,5,6,7,9});
-        result.stream().forEach(System.out::println);
-        Set<Integer> resultSet = ArrayFinder.findCommonElementsIn3SortedArrayEfficient(new int[]{1,2,3,4,5},new int[]{4,5,6,7,0},new int[]{4,5,6,7,9});
-        resultSet.stream().forEach(System.out::println);
-        ArrayFinder.findCommonElementsIn3SortedArrayEfficient2(new int[]{1,2,3,4,5},new int[]{4,5,6,7,0},new int[]{4,5,6,7,9});
-        System.out.println("Subarray sum is zero?");
-        System.out.print(ArrayFinder.IsSubArraySumIsZero(new int[]{1,2,-5,5,3}));
-        System.out.println(ArrayFinder.IsSubArraySumIsZero2(new int[]{1,2,-5,5,3}));
     }
 }

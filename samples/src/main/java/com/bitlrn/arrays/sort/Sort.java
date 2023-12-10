@@ -1,13 +1,14 @@
 package com.bitlrn.arrays.sort;
 
 public class Sort {
-    private int[] mergeScratch = new int[10];
+    private final int[] mergeScratch = new int[10];
 
     /**
      * Works starting with first element being mininum
      * and iterating to find the element least than the mininum,
      * and swap them.  Do it for all elements
      * Time complexity O(n^2)
+     *
      * @param a
      * @param descending
      */
@@ -25,7 +26,7 @@ public class Sort {
                     }
                 }
             }
-            swap(a,i,current);
+            swap(a, i, current);
         }
     }
 
@@ -40,22 +41,22 @@ public class Sort {
      */
     public void bubbleSort(int[] a, boolean descending) {
         boolean swapped = false;
-        for (int i = 0; i < a.length ; ++i) {
+        for (int i = 0; i < a.length; ++i) {
             swapped = false;
-            for (int j=0; j < a.length-1;++j) {
+            for (int j = 0; j < a.length - 1; ++j) {
                 if (!descending) {
-                    if (a[j] > a[j+1]) {
+                    if (a[j] > a[j + 1]) {
                         swap(a, j, j + 1);
                         swapped = true;
                     }
                 } else {
-                    if (a[j] < a[j+1]) {
+                    if (a[j] < a[j + 1]) {
                         swap(a, j, j + 1);
                         swapped = true;
                     }
                 }
             }
-            if (!swapped){
+            if (!swapped) {
                 break;
             }
 
@@ -73,25 +74,26 @@ public class Sort {
      * from lowest to highest order as needed.
      * Worst Case is O(N^2)
      * Best Case is O(N)
+     *
      * @param a
      * @param decrease
      */
     public void insertionSort(int[] a, boolean decrease) {
-        for (int i=1; i < a.length;++i){
+        for (int i = 1; i < a.length; ++i) {
             int current = a[i];
-            int j = i-1;
+            int j = i - 1;
             if (!decrease) {
                 while (j >= 0 && a[j] > current) {
-                    a[j+1] = a[j];
-                    j = j -1;
+                    a[j + 1] = a[j];
+                    j = j - 1;
                 }
-                a[j+1] = current;
-            }else{
+                a[j + 1] = current;
+            } else {
                 while (j >= 0 && a[j] < current) {
-                    a[j+1] = a[j];
-                    j = j -1;
+                    a[j + 1] = a[j];
+                    j = j - 1;
                 }
-                a[j+1] = current;
+                a[j + 1] = current;
             }
         }
     }
@@ -100,97 +102,97 @@ public class Sort {
      * Use the merge sort method to sort the array a
      * It does by dividing into subarrays and sorting/merging them
      * Time Complexity : O(NlogN)
+     *
      * @param a
      * @param low
      * @param high
      */
-    public void mergeSort(int[]a, int low, int high){
-        if (low==high){
+    public void mergeSort(int[] a, int low, int high) {
+        if (low == high) {
             return;
         }
-        int mid = low + (high-low)/2;
-        mergeSort(a,low,mid);
-        mergeSort(a,mid+1,high);
+        int mid = low + (high - low) / 2;
+        mergeSort(a, low, mid);
+        mergeSort(a, mid + 1, high);
         int i = low;
-        int j = mid+1;
-        for (int k=low;k<=high;++k){
-            mergeScratch[k] = a[k];
-        }
+        int j = mid + 1;
+        if (high + 1 - low >= 0) System.arraycopy(a, low, mergeScratch, low, high + 1 - low);
         int k = low;
-        while (k <= high){
-            if ( i <= mid && j <= high){
-                a[k] = Math.min(mergeScratch[i],mergeScratch[j]);
-                if (a[k] == mergeScratch[i]){
+        while (k <= high) {
+            if (i <= mid && j <= high) {
+                a[k] = Math.min(mergeScratch[i], mergeScratch[j]);
+                if (a[k] == mergeScratch[i]) {
                     i++;
-                }else{
+                } else {
                     j++;
                 }
-            }else if ( i <= mid && j > high){
+            } else if (i <= mid && j > high) {
                 a[k] = mergeScratch[i];
                 i++;
-            }else{
+            } else {
                 a[k] = mergeScratch[j];
                 j++;
             }
             k++;
         }
     }
+
     public void mergeSortWithLog(int[] a, int low, int high) {
         if (low == high) {
             return;
         }
-        int mid = low + (high-low)/2;
-        mergeSortWithLog(a,low, mid);
-        mergeSortWithLog(a,mid+1,high);
+        int mid = low + (high - low) / 2;
+        mergeSortWithLog(a, low, mid);
+        mergeSortWithLog(a, mid + 1, high);
 
         int i = low;
-        int j = mid +1;
-        System.out.println("Current i (low) ="+i);
-        System.out.println("Current j(mid+1)="+j);
+        int j = mid + 1;
+        System.out.println("Current i (low) =" + i);
+        System.out.println("Current j(mid+1)=" + j);
         // here we are currently copying the current
         // unsorted elements.
-        System.out.println("Current unsorted elements: low="+low+ " high="+high);
-        for (int k=low; k <= high;k++){
+        System.out.println("Current unsorted elements: low=" + low + " high=" + high);
+        for (int k = low; k <= high; k++) {
             mergeScratch[k] = a[k];
-            System.out.print(" "+ mergeScratch[k]);
+            System.out.print(" " + mergeScratch[k]);
         }
-        System.out.println("");
+        System.out.println();
         int k = low;
-        System.out.println("Starting K with value of low "+ k);
-        while (k <= high){
-            if ( i <= mid && j <= high){
-                System.out.println("Comparing and assigning lower of scratch["+i+"](scratch[i]="+ mergeScratch[i] + ") and scratch["+j+"](scratch[j]=" +
-                        mergeScratch[j] + ") to a["+k+"](a[k]="+a[k] +")");
-                a[k] = Math.min(mergeScratch[i],mergeScratch[j]);
-                System.out.println("Is a["+k+"]="+a[k]+ " equal to scratch["+i+"]="+mergeScratch[i] +"?");
-                if (a[k] == mergeScratch[i]){
+        System.out.println("Starting K with value of low " + k);
+        while (k <= high) {
+            if (i <= mid && j <= high) {
+                System.out.println("Comparing and assigning lower of scratch[" + i + "](scratch[i]=" + mergeScratch[i] + ") and scratch[" + j + "](scratch[j]=" +
+                        mergeScratch[j] + ") to a[" + k + "](a[k]=" + a[k] + ")");
+                a[k] = Math.min(mergeScratch[i], mergeScratch[j]);
+                System.out.println("Is a[" + k + "]=" + a[k] + " equal to scratch[" + i + "]=" + mergeScratch[i] + "?");
+                if (a[k] == mergeScratch[i]) {
                     i++;
-                    System.out.println("Yes. Incremented i to new value "+i);
-                }else{
+                    System.out.println("Yes. Incremented i to new value " + i);
+                } else {
                     j++;
-                    System.out.println("No. Incremented j to new value "+j);
+                    System.out.println("No. Incremented j to new value " + j);
                 }
-            }else if ( i <= mid && j > high){
-                System.out.println(i+ " i is <= mid "+mid + " j (> high) is = "+j);
-                System.out.println("a[k]="+a[k]+ " will be replaced by scratch[i]="+mergeScratch[i]);
+            } else if (i <= mid && j > high) {
+                System.out.println(i + " i is <= mid " + mid + " j (> high) is = " + j);
+                System.out.println("a[k]=" + a[k] + " will be replaced by scratch[i]=" + mergeScratch[i]);
                 a[k] = mergeScratch[i];
                 i++;
-                System.out.println("Incremented i to new value "+i);
-            }else{
-                System.out.println(i+ " i is > mid "+mid + " j (<=high) is = "+j);
-                System.out.println("a[k]="+a[k]+ " will be replaced by scratch[j]="+mergeScratch[j]);
+                System.out.println("Incremented i to new value " + i);
+            } else {
+                System.out.println(i + " i is > mid " + mid + " j (<=high) is = " + j);
+                System.out.println("a[k]=" + a[k] + " will be replaced by scratch[j]=" + mergeScratch[j]);
                 a[k] = mergeScratch[j];
                 j++;
-                System.out.println("Incremented j to new value "+j);
+                System.out.println("Incremented j to new value " + j);
             }
             k++;
-            System.out.println(" new value of k after increment \n"+k);
+            System.out.println(" new value of k after increment \n" + k);
         }
         System.out.println("Current Sorted sub array:");
-        for (int x=low; x<=high;x++){
-            System.out.print(a[x]+" ");
+        for (int x = low; x <= high; x++) {
+            System.out.print(a[x] + " ");
         }
-        System.out.println("");
+        System.out.println();
         System.out.println("next iteration");
     }
 
@@ -200,10 +202,11 @@ public class Sort {
      * it is swapped with left most large element and finally the pivot gets
      * placed at its right position.
      * Repeat it again from leftmost to pivot correct position -1
-     *   and pivot_correct_position+1 to right
+     * and pivot_correct_position+1 to right
+     * <p>
+     * Time complexity : Worst Case is O(N^2)
+     * Best Case is (O(NlogN)
      *
-     *   Time complexity : Worst Case is O(N^2)
-     *                     Best Case is (O(NlogN)
      * @param a
      * @param low
      * @param high
@@ -219,19 +222,10 @@ public class Sort {
                 }
             }
             swap(a, ++i, high);
-            quickSort(a,low,i-1);
-            quickSort(a,i+1,high);
+            quickSort(a, low, i - 1);
+            quickSort(a, i + 1, high);
         }
     }
-
-
-
-
-
-
-
-
-    
 
 
 }

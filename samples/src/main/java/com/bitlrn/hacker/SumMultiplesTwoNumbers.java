@@ -13,13 +13,13 @@ public class SumMultiplesTwoNumbers {
         System.out.println("Enter the series max range[i.e. 1..max]:");
         int rangeMax = scanner.nextInt();
         int i = 1;
-        int sumOfMultiples=0;
-        while (i <= rangeMax){
-            if (i%firstNumber == 0 && i%secondNumber==0){
+        int sumOfMultiples = 0;
+        while (i <= rangeMax) {
+            if (i % firstNumber == 0 && i % secondNumber == 0) {
                 sumOfMultiples += i;
             }
         }
-        System.out.println("The sum of multiples of "+firstNumber + " and "+ secondNumber
-                            );
+        System.out.println("The sum of multiples of " + firstNumber + " and " + secondNumber
+        );
     }
 }
